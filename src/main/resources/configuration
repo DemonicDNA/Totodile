@@ -1,0 +1,34 @@
+[
+  {
+    "name": "DemonicDNA",
+    "description": "Example Of Watcher API Configuration",
+    "interval": 1,
+    "query": {
+      "query": "Kibana format query",
+      "index": "Some index",
+      "timeRange": ""
+    },
+    "condition": {
+      "type": "compare",
+      "check": "hits_total",
+      "equality": "gte",
+      "expected": 10
+    },
+    "actions": [
+      {
+        "type": "panorama",
+        "params": {
+          "url": "http://",
+          "severity": 5,
+          "agent": "smith",
+          "alertGroup": "agroup",
+          "node": "Totodile",
+          "expireTime": 123,
+          "link": "http://link to fix problem",
+          "summary": "summary of problem"
+        }
+      }
+    ],
+    "throttling": 30
+  }
+]

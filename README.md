@@ -11,7 +11,7 @@ Configuration Example:
     {
         "name": "DemonicDNA",
         "description": "Example Of Watcher API Configuration",
-        "interval": 1, //as seconds
+        "interval": 1,
         "query": {
             "query": "Kibana format query",
             "index": "Some index",
@@ -38,7 +38,7 @@ Configuration Example:
                 }
             }
         ],
-        "throttling": 30 //as seconds
+        "throttling": 30
     }
 ]
 ```
