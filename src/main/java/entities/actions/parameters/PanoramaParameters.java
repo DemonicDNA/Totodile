@@ -1,6 +1,6 @@
 package entities.actions.parameters;
 
-public class PanoramaParameters extends TotodileActionParameters{
+public class PanoramaParameters implements TotodileActionParameters{
 
     private String url;
     private Integer severity;

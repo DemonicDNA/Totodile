@@ -1,6 +1,6 @@
 package entities.condition;
 
-public class HitsTotalCondition extends TotodileCondition{
+public class HitsTotalCondition extends TotodileCondition {
 
     private ConditionEqualityType equality;
     private int expected;

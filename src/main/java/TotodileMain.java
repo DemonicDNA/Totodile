@@ -1,8 +1,7 @@
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entities.TotodileWatcher;
-import managers.TotodileWatchersManager;
+import managers.WatcherManager;
 import io.javalin.Javalin;
 
 import java.util.List;
@@ -12,7 +11,7 @@ public class TotodileMain {
 
     //todo: consider moving to swagger on top of dropwizard
     private static final ObjectMapper objectMapper = new ObjectMapper();
-    private static TotodileWatchersManager watchersManager = null;
+    private static WatcherManager watchersManager = WatcherManager.getInstance();
 
     public static void main(String[] args) {
 
@@ -21,9 +20,10 @@ public class TotodileMain {
         javalin.post("/configuration", ctx -> {
             try {
                 List<TotodileWatcher> watcherList = objectMapper.readValue(ctx.body(),
-                        new TypeReference<List<TotodileWatcher>>() {});
+                        new TypeReference<List<TotodileWatcher>>() {
+                        });
                 stop();
-                watchersManager = new TotodileWatchersManager(watcherList);
+                watchersManager.init(watcherList);
                 boolean result = watchersManager.startAllWatchers();
                 if (result) {
                     ctx.status(200);
@@ -53,9 +53,7 @@ public class TotodileMain {
     }
 
     private static void stop() {
-        if (watchersManager != null) {
-            watchersManager.stopAllWatchers();
-        }
+        watchersManager.stopAllWatchers();
     }
 
 }

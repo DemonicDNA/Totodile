@@ -3,7 +3,7 @@ package handlers.conditionresolve;
 import entities.condition.HitsTotalCondition;
 import handlers.queryexec.results.Result;
 
-public class HitsTotalConditionResolver {
+public class HitsTotalConditionResolver implements ConditionResolver{
 
     private final HitsTotalCondition hitsTotalCondition;
 

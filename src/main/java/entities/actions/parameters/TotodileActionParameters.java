@@ -1,4 +1,4 @@
 package entities.actions.parameters;
 
-public abstract class TotodileActionParameters {
+public interface TotodileActionParameters {
 }

@@ -8,16 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 
-//todo: implement as singleton
-public class TotodileWatchersManager {
+public class WatcherManager {
 
-    private final List<TotodileWatcher> watchers;
-    private final Map<String, ScheduledExecutorService> watcherNameToExecutorMap = new ConcurrentHashMap<>();
+    private List<TotodileWatcher> watchers;
+    private Map<String, ScheduledExecutorService> watcherNameToExecutorMap = new ConcurrentHashMap<>();
 
-    public TotodileWatchersManager(List<TotodileWatcher> watchers) {
-        this.watchers = watchers;
+    public static WatcherManager getInstance() {
+        return Loader.INSTANCE;
     }
 
+
+    public void init(List<TotodileWatcher> watchers){
+        this.watchers = watchers;
+    }
 
     public boolean startAllWatchers() {
         if(watchers == null) {
@@ -53,8 +56,19 @@ public class TotodileWatchersManager {
     }
 
     public void stopAllWatchers() {
-        System.out.println("Stopping Execution of all Watchers");
-        watcherNameToExecutorMap.values().forEach(ExecutorService::shutdownNow);
+        if(watcherNameToExecutorMap.size() > 0) {
+            System.out.println("Stopping Execution of all Watchers");
+            watcherNameToExecutorMap.values().forEach(ExecutorService::shutdownNow);
+            watcherNameToExecutorMap = new ConcurrentHashMap<>();
+        } else{
+            System.out.println("Warn: No Watchers to stop");
+        }
+    }
+
+    private WatcherManager(){}
+
+    private static class Loader {
+        static final WatcherManager INSTANCE = new WatcherManager();
     }
 
     private boolean isWatcherValid(TotodileWatcher watcher) {
@@ -74,5 +88,4 @@ public class TotodileWatchersManager {
         }
         return true;
     }
-
 }
