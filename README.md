@@ -5,13 +5,13 @@ Implamantation of WatcherAPI using Java.
 2) Add a Condition that you want to be resolved
 3) Act using the Action Configuration
  
-Configuration Example:
+Configuration Example (Times are in seconds):
 ```json
 [
     {
         "name": "DemonicDNA",
         "description": "Example Of Watcher API Configuration",
-        "interval": 1, //as seconds
+        "interval": 1,
         "query": {
             "query": "Kibana format query",
             "index": "Some index",
@@ -38,7 +38,7 @@ Configuration Example:
                 }
             }
         ],
-        "throttling": 30 //as seconds
+        "throttling": 30
     }
 ]
 ```
